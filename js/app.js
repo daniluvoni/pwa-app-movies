@@ -7,6 +7,7 @@ const inputElement = document.getElementById("search-input");
 const moviesList = document.getElementById("movies-list");
 const next = document.getElementById("next");
 const prev = document.getElementById("prev");
+const btnAdd = document.getElementById("btnAdd");
 
 next.style.display = 'none';
 prev.style.display = 'none';
@@ -75,7 +76,7 @@ function searchMovies(movieName) {
 
                 let pageCount = responseJson.totalResults / 10;
 
-                fetchAndShowAllMovies(responseJson);
+                fetchAndShowAllMovies(responseJson.Search.map(movieData => movieData.imdbID));
 
                 if (currentPage > 1) {
 
@@ -114,18 +115,17 @@ function searchMovies(movieName) {
     inputElement.focus();
 }
 
-function fetchAndShowAllMovies(responseJson) {
+function fetchAndShowAllMovies(moveIds) {
 
-    responseJson.Search.forEach(movieData => {
-
-        fechtAndShowMovieDetail(movieData);
+    moveIds.forEach(id => {
+        fechtAndShowMovieDetail(id);
 
     });
 }
 
-function fechtAndShowMovieDetail(movieData) {
+function fechtAndShowMovieDetail(movieId) {
 
-    const urlMovieData = `https://www.omdbapi.com/?i=${movieData.imdbID}&plot=full&r=json&tomatoes=true&apikey=${apiKey}`;
+    const urlMovieData = `https://www.omdbapi.com/?i=${movieId}&plot=full&r=json&tomatoes=true&apikey=${apiKey}`;
 
     fetch(urlMovieData)
         .then((response) => {
@@ -156,7 +156,8 @@ function showMovieDetail(result) {
                     <p id="movie-plot"><strong>Plot: </strong>${result.Plot}</p>
                     <p id="movie-website"><strong>Website: </strong>${result.Website}</p>
                     <p><em>IMDB Rating: ${result.imdbRating} | Rotten Tomatoes Meter: ${result.tomatoMeter} | Metascore: ${result.Metascore}</em></p>
-                    <button type="button">Añadir a lista</button>
+                    <button id='btnAdd' type="button" onclick='addToList("${result.imdbID}");'>Añadir a lista</button>
+                
             </li>              
         </ul>
                                                             
@@ -176,5 +177,51 @@ prev.addEventListener('click', () => {
     moviesList.innerHTML = "";
     currentPage -= 1;
     searchMovies(inputElement.value);
+
+});
+
+/* MI LISTA */
+const myList=[];
+function addToList(result) {
+    
+   // let myList=[];
+    myList.push(result);   
+    saveMoviesDataInStorage(myList);
+    showMoviesDataFromLocalStorage(); 
+ 
+}
+
+function deletecOfList( result ){
+    let this_btn=document.getElementsByClassName("btn btn-primary")[btn];
+    //Eliminamos el elemento de la lista que no se quiere.
+    document.getElementById( "my-list" ).removeChild( result );
+    this_btn.innerHTML="añadir al carrito.";
+            
+    this_btn.onclick=function(){
+        addToList(result);
+    }
+}
+
+function saveMoviesDataInStorage(result) {
+
+    localStorage.setItem("movies", JSON.stringify(result));
+}
+
+/**
+ * Establece la sintáxis HTML del localStorage
+ */
+ function showMoviesDataFromLocalStorage() {
+   
+    if (localStorage != undefined && localStorage.movies != undefined) {
+        
+        let movies = JSON.parse(localStorage.movies);
+        fetchAndShowAllMovies(movies);
+        console.log("movies",movies);
+    }
+}
+
+$(window).ready(function () {
+
+    showMoviesDataFromLocalStorage();
 
 });
