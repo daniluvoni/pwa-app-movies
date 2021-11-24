@@ -5,7 +5,6 @@ const button = document.getElementById("send-button");
 const main = document.getElementById("main");
 const inputElement = document.getElementById("search-input");
 const moviesList = document.getElementById("movies-list");
-const links = document.getElementById("links");
 const next = document.getElementById("next");
 const prev = document.getElementById("prev");
 
@@ -48,7 +47,7 @@ function gravarEvento(evt) {
 }
 
 button.addEventListener("click", () => {
-    console.log("Movie: ", inputElement.value);
+
     moviesList.innerHTML = "";
     searchMovies(inputElement.value);
 });
@@ -57,12 +56,9 @@ let currentPage = 1;
 
 function searchMovies(movieName) {
 
-    console.log("searchMovies", movieName);
+    const urlSearch = `http://www.omdbapi.com/?s=${movieName}&apikey=${apiKey}&type=movie&r=json&page=${currentPage}`;
 
-
-    const url = `http://www.omdbapi.com/?s=${movieName}&apikey=${apiKey}&type=movie&r=json&page=${currentPage}`;
-
-    fetch(url)
+    fetch(urlSearch)
         .then((response) => {
 
             result.style.display = "block";
@@ -79,34 +75,7 @@ function searchMovies(movieName) {
 
                 let pageCount = responseJson.totalResults / 10;
 
-                responseJson.Search.forEach(movieData => {
-
-                    const url = `https://www.omdbapi.com/?i=${movieData.imdbID}&plot=full&r=json&tomatoes=true&apikey=${apiKey}`;
-
-                    fetch(url)
-                        .then((response) => {
-                            return response.json();
-
-                        })
-                        .then((result) => {
-                            console.log(result);
-                            moviesList.innerHTML += `<div> 
-                                    <ul>
-                                        <li>
-                                                <img id="movie-poster" src="${result.Poster}" alt="${result.Title}"> </li>
-                                        
-                                                <p id="movie-title">${result.Title}</p>
-                                                <p id="movie-year">${result.Year}</p>
-                                                <p id="movie-plot"><strong>Plot: </strong>${result.Plot}</p>
-                                                <p id="movie-website"><strong>Website: </strong>${result.Website}</p>
-                                                <p><em>IMDB Rating: ${result.imdbRating} | Rotten Tomatoes Meter: ${result.tomatoMeter} | Metascore: ${result.Metascore}</em></p>
-                                                <button type="button">Añadir a lista</button>
-                                        </li>              
-                                    </ul>
-                                                                                        
-                                </div>`
-                        });
-                });
+                fetchAndShowAllMovies(responseJson);
 
                 if (currentPage > 1) {
 
@@ -132,7 +101,6 @@ function searchMovies(movieName) {
                 result.style.display = 'none';
                 noResult.style.display = 'block';
             }
-
         })
         .catch(err => {
 
@@ -140,25 +108,73 @@ function searchMovies(movieName) {
             msg.textContent = "Ingrese una película válida";
 
         });
-        
+
     msg.textContent = "";
     //form.reset();
     inputElement.focus();
 }
 
-function showMovieData(responseJson) {
+function fetchAndShowAllMovies(responseJson) {
 
+    responseJson.Search.forEach(movieData => {
 
+        fechtAndShowMovieDetail(movieData);
+
+    });
+}
+
+function fechtAndShowMovieDetail(movieData) {
+
+    const urlMovieData = `https://www.omdbapi.com/?i=${movieData.imdbID}&plot=full&r=json&tomatoes=true&apikey=${apiKey}`;
+
+    fetch(urlMovieData)
+        .then((response) => {
+
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw "Respuesta incorrecta del servidor";
+            }
+
+        })
+        .then((result) => {
+
+            showMovieDetail(result);
+
+        });
+}
+
+function showMovieDetail(result) {
+
+    moviesList.innerHTML += `<div> 
+        <ul>
+            <li>
+                    <img id="movie-poster" src="${result.Poster}" alt="${result.Title}"> </li>
+            
+                    <p id="movie-title">${result.Title}</p>
+                    <p id="movie-year">${result.Year}</p>
+                    <p id="movie-plot"><strong>Plot: </strong>${result.Plot}</p>
+                    <p id="movie-website"><strong>Website: </strong>${result.Website}</p>
+                    <p><em>IMDB Rating: ${result.imdbRating} | Rotten Tomatoes Meter: ${result.tomatoMeter} | Metascore: ${result.Metascore}</em></p>
+                    <button type="button">Añadir a lista</button>
+            </li>              
+        </ul>
+                                                            
+    </div>`;
 }
 
 next.addEventListener('click', () => {
+
     moviesList.innerHTML = "";
     currentPage += 1;
     searchMovies(inputElement.value);
+
 });
 
 prev.addEventListener('click', () => {
+
     moviesList.innerHTML = "";
     currentPage -= 1;
     searchMovies(inputElement.value);
+
 });
