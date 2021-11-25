@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUVONI EVELIN DANIELA | Cátedra PWA</title>
-    <link rel="shortcut icon" type="img/ico" href="images/icons/favicon.ico">
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
-    <link href="style.css" rel="stylesheet">
-    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" type="img/ico" href="../images/icons/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="manifest" href="../manifest.json">
     <link rel="offline-resource" href="/">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="../index.html">
                     <h1>D<em>Movies</em></h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -27,15 +29,15 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home
+                            <a class="nav-link" href="../index.html">Home
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="sections/top-10.html">Top 10 películas</a>
+                            <a class="nav-link" href="top-ten.html">Top 10 películas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="sections/mi-lista.html">Mi lista</a>
+                            <a class="nav-link" href="my-list.html">Mi lista</a>
                         </li>
                     </ul>
                 </div>
@@ -48,7 +50,7 @@
     <section class="container">
 
         <div id="result">
-            <div id="movies-list">
+            <div id="my-list">
 
             </div>
             <div>
@@ -57,11 +59,15 @@
             </div>
 
             <div id="noResults">
-                <p>Not found</p>
+                <p>Not found my list</p>
             </div>
 
         </div>
+
     </section>
-    <script src="js/app.js"></script>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script src="../js/myList.js"></script>
+    <script src="../js/movies.js"></script>
 </body>
+
 </html>
