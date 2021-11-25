@@ -7,14 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUVONI EVELIN DANIELA | Cátedra PWA</title>
     <link rel="shortcut icon" type="img/ico" href="../images/icons/favicon.ico">
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
     <link href="../css/style.css" rel="stylesheet">
     <link rel="manifest" href="../manifest.json">
     <link rel="offline-resource" href="/">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body  onload="showMoviesDataFromLocalStorage()">
+       
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
@@ -37,7 +39,7 @@
                             <a class="nav-link" href="top-ten.html">Top 10 películas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="my-list.html">Mi lista</a>
+                            <a class="nav-link active" href="watchlist.html">Watchlist</a>
                         </li>
                     </ul>
                 </div>
@@ -65,8 +67,9 @@
         </div>
 
     </section>
-    <script src="../js/jquery-3.5.1.js"></script>
-    <script src="../js/myList.js"></script>
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script src="../js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../js/watchlist.js"></script>
     <script src="../js/movies.js"></script>
 </body>
 

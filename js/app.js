@@ -14,6 +14,8 @@ result.style.display = 'none';
 const noResult = document.getElementById("noResults");
 noResult.style.display = 'none';
 
+let currentPage = 1;
+
 const botaoInstalar = document.getElementById('btInstalar');
 
 let initialiseUI = function () {
@@ -45,17 +47,12 @@ function gravarEvento(evt) {
     deferredInstallPrompt = evt;
 }
 
-
-
 btnSearch.addEventListener("click", () => {
 
     moviesList.innerHTML = "";
     searchMovies(inputElement.value);
+
 });
-
-let currentPage = 1;
-
-
 
 next.addEventListener('click', () => {
 
@@ -73,21 +70,3 @@ prev.addEventListener('click', () => {
 
 });
 
-function addMovieToList(result) {
-
-    let arrayMovies = getMoviesFromLocalstorage();
-    arrayMovies.push(result);
-    saveMoviesDataInStorage(arrayMovies);
-
-}
-
-function deletecOfList(result) {
-    let this_btn = document.getElementsByClassName("btn btn-primary")[btn];
-    //Eliminamos el elemento de la lista que no se quiere.
-    //document.getElementById( "my-list" ).removeChild( result );
-    this_btn.innerHTML = "añadir al carrito.";
-
-    this_btn.onclick = function () {
-        addMovieToList(result);
-    }
-}

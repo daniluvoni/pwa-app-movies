@@ -91,21 +91,47 @@ function fechtAndShowMovieDetail(movieId, element) {
 
 function showMovieDetail(movieData, element) {
 
-    element.innerHTML += `<div> 
-        <ul>
-            <li>
-                    <img id="movie-poster" src="${movieData.Poster}" alt="${movieData.Title}"> </li>
-            
-                    <p id="movie-title">${movieData.Title}</p>
-                    <p id="movie-year">${movieData.Year}</p>
-                    <p id="movie-plot"><strong>Plot: </strong>${movieData.Plot}</p>
-                    <p id="movie-website"><strong>Website: </strong>${movieData.Website}</p>
-                    <p><em>IMDB Rating: ${movieData.imdbRating} | Rotten Tomatoes Meter: ${movieData.tomatoMeter} | Metascore: ${movieData.Metascore}</em></p>
-                    <button id='btnAdd' type="button" onclick='addToList("${movieData.imdbID}");'>Añadir a lista</button>
-                
-            </li>              
-        </ul>                                                            
-    </div>`;
+    element.innerHTML += `<div>
+                            <ul>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <img id="movie-poster" src="${movieData.Poster}" alt="${movieData.Title}">
+
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div>
+                                                <h3 class="title" id="movie-title">${movieData.Title} </h3>
+                                            </div>
+                                            <p id="movie-plot">${movieData.Plot}</p>
+
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <ul>
+                                                        <li><strong>Duration: </strong>${movieData.Runtime}</li>
+                                                        <li><strong>Release date: </strong>${movieData.Year}</li>
+                                                        <li><strong>Genre: </strong>${movieData.Genre}</li>
+                                                        <li><strong>Rated: </strong>${movieData.Rated}</li>                            
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6">
+                                                    <ul>
+                                                        <li><strong>Director: </strong>${movieData.Director}</li>
+                                                        <li><strong>IMDB Rating: </strong>${movieData.imdbRating}/10</li>                                
+                                                        <li><strong>Metascore: </strong>${movieData.Metascore}</li>
+                                                        <li><strong>Website: </strong>${movieData.Website}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div>                  
+                                                <button id='btnAdd' type="button" onclick='addMovieToWatchlist("${movieData.imdbID}");'>+ Add to Watchlist</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>`;
 }
 
 function getMoviesFromLocalstorage() {
@@ -125,8 +151,18 @@ function saveMoviesDataInStorage(result) {
 
 }
 
-$(window).ready(function () {
+function addMovieToWatchlist(moveId) {
 
-    showMoviesDataFromLocalStorage();
+    let arrayMovies = getMoviesFromLocalstorage();
+    arrayMovies.push(moveId);
+    saveMoviesDataInStorage(arrayMovies);
 
-});
+}
+
+function removeMovieFromWatchlist(movieId) {
+
+    let arrayMovies = getMoviesFromLocalstorage();
+    arrayMovies = arrayMovies.filter(id => id == movieId);
+    saveMoviesDataInStorage(arrayMovies);
+
+}
