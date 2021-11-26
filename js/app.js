@@ -16,57 +16,19 @@ noResult.style.display = 'none';
 
 let currentPage = 1;
 
-const botaoInstalar = document.getElementById('btInstalar');
-
-let initialiseUI = function () {
-
-    botaoInstalar.removeAttribute('hidden');
-    botaoInstalar.addEventListener('click', function () {
-
-        deferredInstallPrompt.prompt();
-
-        deferredInstallPrompt.userChoice.then((choice) => {
-
-            if (choice.outcome === 'accepted') {
-
-                console.log("Instalación aceptada por el usuario");
-
-            } else {
-
-                console.log("El usuario no aceptó la instalación");
-
-            }
-        });
-    });
-}
-
-window.addEventListener('beforeinstallprompt', gravarEvento);
-
-function gravarEvento(evt) {
-    console.log("beforeinstallprompt Event fired");
-    deferredInstallPrompt = evt;
-}
-
 btnSearch.addEventListener("click", () => {
-
     moviesList.innerHTML = "";
     searchMovies(inputElement.value);
-
 });
 
 next.addEventListener('click', () => {
-
     moviesList.innerHTML = "";
     currentPage += 1;
     searchMovies(inputElement.value);
-
 });
 
 prev.addEventListener('click', () => {
-
     moviesList.innerHTML = "";
     currentPage -= 1;
     searchMovies(inputElement.value);
-
 });
-

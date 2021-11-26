@@ -8,9 +8,7 @@ const result = document.getElementById("result");
 const noResult = document.getElementById("noResults");
 noResult.style.display = 'none';
 
-
 function showMoviesDataFromLocalStorage() {
-
     let movies = getMoviesFromLocalstorage();
     fetchAndShowAllMovies(movies, showMyList, 'removeMovieAndRefreshPage');
 }

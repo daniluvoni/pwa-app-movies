@@ -307,7 +307,7 @@ form.form-search input[type="text"] {
 input[type="text"]:focus {
   outline: none;
   border: 1px solid #232323;
-  color: #fff;
+  color: green;
 }
 
 form.form-search button {
@@ -353,6 +353,14 @@ form.form-search::after {
 }
 
 #movies-list ul{
+  list-style-type: none;
+}
+
+#my-list ul{
+  list-style-type: none;
+}
+
+#top-ten ul{
   list-style-type: none;
 }
 
@@ -428,3 +436,80 @@ form.form-search::after {
   color: #fff;
 }
 
+.online, .offline{
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin: 1rem;
+}
+
+.online{
+  border: 3px solid #178344;
+  color: #178344;
+}
+
+.offline{
+  border: 3px solid #8f130c;
+  color: #8f130c;
+}
+
+/* Footer */
+
+footer {
+  margin-top: 100px;
+  text-align: center;
+  background-color: #121212;
+  padding: 60px 0 2px 0;
+}
+footer p{
+  color: #eee;
+}
+footer .inner-content {
+  border-top: 1px solid #eee;
+  margin-top: 60px;
+  padding: 60px 0px;
+}
+
+footer .inner-content p {
+  text-transform: uppercase;
+  color: #eee;
+}
+
+footer .inner-content p a {
+  color: #f33f3f;
+  margin-left: 3px;
+}
+
+footer p {
+  margin-bottom: 15px;
+}
+
+footer ul.social-icons li {
+  margin-right: 15px;
+}
+
+ul.social-icons li {
+  display: inline-block;
+  margin-right: 3px;
+}
+
+ul.social-icons li:last-child {
+  margin-right: 0;
+}
+
+ul.social-icons li a {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  line-height: 50px;
+  background-color: #eee;
+  color: #121212;
+  font-size: 1.25em;
+  text-align: center;
+  transition: all .3s;
+}
+
+ul.social-icons li a:hover {
+  background-color: #f33f3f;
+  color: #fff;
+}

@@ -1,4 +1,35 @@
 const apiKey = "c2b93e6";
+const btnInstall = document.getElementById('btInstalar');
+const statusConnection = document.getElementById('status');
+
+setInterval(function () {
+    statusConnection.className = navigator.onLine ? 'online' : 'offline';
+    statusConnection.innerHTML = navigator.onLine ? 'online' : 'offline';
+}, 3000);
+
+let initializeUI = function () {
+
+    btnInstall.removeAttribute('hidden');
+    btnInstall.addEventListener('click', function () {
+
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choice) => {
+
+            if (choice.outcome === 'accepted') {
+                console.log("Instalación aceptada por el usuario");
+            } else {
+                console.log("El usuario no aceptó la instalación");
+            }
+        });
+    });
+}
+
+window.addEventListener('beforeinstallprompt', gravarEvento);
+
+function gravarEvento(evt) {
+    console.log("beforeinstallprompt Event fired");
+    deferredInstallPrompt = evt;
+}
 
 function searchMovies(movieName) {
 
@@ -24,27 +55,18 @@ function searchMovies(movieName) {
                 fetchAndShowAllMovies(responseJson.Search.map(movieData => movieData.imdbID), moviesList, 'addMovieToWatchlist');
 
                 if (currentPage > 1) {
-
                     prev.style.display = 'block';
-
                 } else {
-
                     prev.style.display = 'none';
                 }
 
                 if (currentPage < pageCount) {
-
-
                     next.style.display = 'block';
-
                 } else {
-
                     next.style.display = 'none';
                 }
-
             }
             else {
-
                 result.style.display = 'none';
                 noResult.style.display = 'block';
             }
@@ -55,7 +77,6 @@ function searchMovies(movieName) {
             msg.textContent = "Ingrese una película válida";
 
         });
-
     msg.textContent = "";
     //form.reset();
     inputElement.focus();
@@ -74,18 +95,14 @@ function fechtAndShowMovieDetail(movieId, element, buttonAction) {
 
     fetch(urlMovieData)
         .then((response) => {
-
             if (response.status === 200) {
                 return response.json();
             } else {
                 throw "Respuesta incorrecta del servidor";
             }
-
         })
         .then((result) => {
-
             showMovieDetail(result, element, buttonAction);
-
         });
 }
 
