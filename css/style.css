@@ -368,7 +368,7 @@ form.form-search::after {
   margin-bottom: 50px;
 }
 
-#btnAction{
+#btnRemove{
   background-color: #f33f3f;
     color: #fff;
     font-size: 14px;
@@ -383,7 +383,27 @@ form.form-search::after {
     margin-top: 10px;
 }
 
-#btnAction:hover{
+#btnRemove:hover{
+  background-color: #121212;
+    color: #fff;
+}
+
+#btnAdd{
+  background-color: #f33f3f;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 8px 16px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: all 0.3s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#btnAdd:hover{
   background-color: #121212;
     color: #fff;
 }
@@ -392,8 +412,7 @@ form.form-search::after {
   margin-bottom: 10px;
 }
 
-.btnNextPrev{  
-  
+.btnNextPrev{    
    margin-bottom: 60px;
 }
 
@@ -436,7 +455,7 @@ form.form-search::after {
   color: #fff;
 }
 
-.online, .offline{
+.offline{
   display: inline-block;
   padding: 0.5rem;
   border-radius: 5px;
@@ -444,8 +463,7 @@ form.form-search::after {
 }
 
 .online{
-  border: 3px solid #178344;
-  color: #178344;
+  visibility: hidden;
 }
 
 .offline{
@@ -456,17 +474,19 @@ form.form-search::after {
 /* Footer */
 
 footer {
-  margin-top: 100px;
+  margin-top: 0px;
   text-align: center;
   background-color: #121212;
   padding: 60px 0 2px 0;
 }
+
 footer p{
   color: #eee;
 }
+
 footer .inner-content {
   border-top: 1px solid #eee;
-  margin-top: 60px;
+  margin-top: 40px;
   padding: 60px 0px;
 }
 
@@ -512,4 +532,39 @@ ul.social-icons li a {
 ul.social-icons li a:hover {
   background-color: #f33f3f;
   color: #fff;
+}
+
+#btnInstall{
+  background-color: #f33f3f;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 8px 16px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: all 0.3s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#btnInstall:hover{
+  background-color: #121212;
+    color: #fff;
+}
+
+#toast-title{
+  color:#121212;
+}
+
+#noResults{
+  margin-bottom: 80px;
+}
+#noResults p{
+  font-size: 1.2em; 
+}
+
+picture{
+  width: 50%;
 }

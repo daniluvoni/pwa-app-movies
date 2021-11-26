@@ -1,5 +1,5 @@
 const apiKey = "c2b93e6";
-const btnInstall = document.getElementById('btInstalar');
+const btnInstall = document.getElementById('btnInstall');
 const statusConnection = document.getElementById('status');
 
 setInterval(function () {
@@ -24,14 +24,14 @@ let initializeUI = function () {
     });
 }
 
-window.addEventListener('beforeinstallprompt', gravarEvento);
+window.addEventListener('beforeinstallprompt', saveEventInstallApp);
 
-function gravarEvento(evt) {
+function saveEventInstallApp(event) {
     console.log("beforeinstallprompt Event fired");
-    deferredInstallPrompt = evt;
+    deferredInstallPrompt = event;
 }
 
-function searchMovies(movieName) {
+function searchMovies(movieName, buttonAction) {
 
     const urlSearch = `http://www.omdbapi.com/?s=${movieName}&apikey=${apiKey}&type=movie&r=json&page=${currentPage}`;
 
@@ -52,7 +52,7 @@ function searchMovies(movieName) {
 
                 let pageCount = responseJson.totalResults / 10;
 
-                fetchAndShowAllMovies(responseJson.Search.map(movieData => movieData.imdbID), moviesList, 'addMovieToWatchlist');
+                fetchAndShowAllMovies(responseJson.Search.map(movieData => movieData.imdbID), moviesList, buttonAction);
 
                 if (currentPage > 1) {
                     prev.style.display = 'block';
@@ -108,14 +108,6 @@ function fechtAndShowMovieDetail(movieId, element, buttonAction) {
 
 function showMovieDetail(movieData, element, buttonAction) {
 
-    let nameBtn = "";
-    if (buttonAction == 'addMovieToWatchlist') {
-        nameBtn = 'Add to Watchlist';
-    }
-    else {
-        nameBtn = 'Remove';
-    }
-
     element.innerHTML += `<div>
                             <ul>
                                 <li class="li-movie">
@@ -154,7 +146,9 @@ function showMovieDetail(movieData, element, buttonAction) {
                                                 </div>
                                             </div>
                                             <div>                                              
-                                                <button id='btnAction' type="button" onclick='${buttonAction}("${movieData.imdbID}");'>${nameBtn}</button>
+                                                <button id=${doesTheMovieExistsInStorage(movieData.imdbID) ? 'btnRemove' : 'btnAdd'} type="button" onclick='${buttonAction}("${movieData.imdbID}");'>
+                                                ${doesTheMovieExistsInStorage(movieData.imdbID) ? 'Remove' : 'Add to watchlist'}
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -176,9 +170,20 @@ function saveMoviesDataInStorage(result) {
 }
 
 function addMovieToWatchlist(moveId) {
+    if (doesTheMovieExistsInStorage(moveId)) return;
     let arrayMovies = getMoviesFromLocalstorage();
     arrayMovies.push(moveId);
     saveMoviesDataInStorage(arrayMovies);
+}
+
+function doesTheMovieExistsInStorage(movieId) {
+    let movies = getMoviesFromLocalstorage();
+    for (let index = 0; index < movies.length; index++) {
+        if (movieId == movies[index]) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function removeMovieFromWatchlist(movieId) {

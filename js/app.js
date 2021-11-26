@@ -5,7 +5,6 @@ const inputElement = document.getElementById("search-input");
 const moviesList = document.getElementById("movies-list");
 const next = document.getElementById("next");
 const prev = document.getElementById("prev");
-const btnAdd = document.getElementById("btnAdd");
 
 next.style.display = 'none';
 prev.style.display = 'none';
@@ -18,17 +17,26 @@ let currentPage = 1;
 
 btnSearch.addEventListener("click", () => {
     moviesList.innerHTML = "";
-    searchMovies(inputElement.value);
+    searchMovies(inputElement.value, 'bleh');
 });
 
 next.addEventListener('click', () => {
     moviesList.innerHTML = "";
     currentPage += 1;
-    searchMovies(inputElement.value);
+    searchMovies(inputElement.value, 'bleh');
 });
 
 prev.addEventListener('click', () => {
     moviesList.innerHTML = "";
     currentPage -= 1;
-    searchMovies(inputElement.value);
+    searchMovies(inputElement.value, 'bleh');
 });
+
+function bleh(moveId) {
+    addMovieToWatchlist(moveId);
+    // TODO: buscar el boton de la pelicula para cambiarle el id
+}
+
+$(document).ready(function(){
+    $('.toast').toast('show');
+  });
