@@ -12,5 +12,10 @@ noResult.style.display = 'none';
 function showMoviesDataFromLocalStorage() {
 
     let movies = getMoviesFromLocalstorage();
-    fetchAndShowAllMovies(movies, showMyList);
+    fetchAndShowAllMovies(movies, showMyList, 'removeMovieAndRefreshPage');
+}
+
+function removeMovieAndRefreshPage(movieId){
+    removeMovieFromWatchlist(movieId);
+    location.reload();
 }

@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="../index.html">
-                    <h1>D<em>Movies</em></h1>
+                    <h1>NET<em>Movies</em></h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,26 +47,35 @@
         </nav>
     </header>
 
-    <h1>Mi lista</h1>
 
     <section class="container">
 
         <div id="result">
+
+            <div class="section-heading">
+                <h3>Your watchlist</h3>
+            </div>
+
             <div id="my-list">
 
             </div>
-            <div>
-                <button id="prev" class="btn">Prev</button>
-                <button id="next" class="btn">Next</button>
+            <div class="row btnNextPrev">
+                <div class="col d-flex justify-content-end">
+                    <button id="prev" type="button">&#8249;</button>
+                </div>
+                <div class="col">
+                    <button id="next" type="button">&#8250;</button>
+                </div>
             </div>
 
             <div id="noResults">
-                <p>Not found my list</p>
+                <p>Not found</p>
             </div>
 
         </div>
 
     </section>
+
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="../js/watchlist.js"></script>
