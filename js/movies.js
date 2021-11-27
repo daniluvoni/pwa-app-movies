@@ -1,5 +1,4 @@
 const apiKey = "c2b93e6";
-const btnInstall = document.getElementById('btnInstall');
 const statusConnection = document.getElementById('status');
 
 setInterval(function () {
@@ -166,65 +165,4 @@ function removeMovieFromWatchlist(movieId) {
     let arrayMovies = getMoviesFromLocalstorage();
     arrayMovies = arrayMovies.filter(id => id != movieId);
     saveMoviesDataInStorage(arrayMovies);
-}
-
-let initializeUI = function () {
-
-    btnInstall.removeAttribute('hidden');
-    btnInstall.addEventListener('click', function () {
-
-        deferredInstallPrompt.prompt();
-        deferredInstallPrompt.userChoice.then((choice) => {
-
-            if (choice.outcome === 'accepted') {
-                console.log("Instalación aceptada por el usuario");
-            } else {
-                console.log("El usuario no aceptó la instalación");
-            }
-        });
-    });
-}
-
-window.addEventListener('beforeinstallprompt', saveEventInstallApp);
-
-function saveEventInstallApp(event) {
-    console.log("beforeinstallprompt Event fired");
-    deferredInstallPrompt = event;
-}
-
-
-//Cache conteúdo dinâmico
-var cache_cards = function (data_json) {
-
-    if ('caches' in window) {
-
-        caches.delete('movie-app-v1').then(function () {
-
-            console.log('Deletando cache de conteúdo antigo');
-
-            if (data_json.length > 0) {
-
-                var files = ['dados.json'];
-
-                //Entrando na categoria
-                for (var i = 0; i < data_json.length; i++) {
-
-                    //Entrando no item
-                    for (var j = 0; j < data_json[i].itens.length; j++) {
-                        if (files.indexOf(data_json[i].itens[j].imagem) == -1) {
-                            files.push(data_json[i].itens[j].imagem);
-                        }
-                    }
-                }
-
-                caches.open('netmovies-v1').then(function (cache) {
-
-                    cache.addAll(files).then(function () {
-                        console.log("Arquivos de conteúdo cacheados!");
-                    });
-
-                });
-            }
-        });
-    }
 }

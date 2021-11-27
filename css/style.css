@@ -584,3 +584,35 @@ picture {
   background-color: #121212;
   color: #fff;
 }
+
+@media all and (display-mode: standalone) {
+  body {
+    background-color: yellow;
+  }
+}
+
+.prompt {
+  background-image: url('../images/icons/48.png');
+  background-position-x: 1rem;
+  background-position-y: 1.5rem;
+  background-repeat: no-repeat;
+  background-size: auto 40%;
+  background-color: #ffffff;
+  box-shadow: 0 20px 40px 0 rgba(91, 107, 174, 0.15);
+  padding: 1.5rem 1rem 0.5rem 5rem;
+  position: fixed;
+  transition: all 0.5s ease-in-out;
+  width: 100vw;
+  z-index: 9;
+}
+
+.prompt.show {
+  transition-delay: 3s;
+  bottom: 0;
+  opacity: 1;
+}
+
+.prompt.hide {
+  bottom: -100%;
+  opacity: 0;
+}
