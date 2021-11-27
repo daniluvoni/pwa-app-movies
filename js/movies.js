@@ -1,4 +1,4 @@
-const apiKey = "";
+const apiKey = "c2b93e6";
 const btnInstall = document.getElementById('btnInstall');
 const statusConnection = document.getElementById('status');
 
@@ -9,7 +9,7 @@ setInterval(function () {
 
 function searchMovies(movieName, buttonAction) {
 
-    const urlSearch = `http://www.omdbapi.com/?s=${movieName}&apikey=${apiKey}&type=movie&r=json&page=${currentPage}`;
+    const urlSearch = `https://www.omdbapi.com/?s=${movieName}&apikey=${apiKey}&type=movie&r=json&page=${currentPage}`;
 
     fetch(urlSearch)
         .then((response) => {
